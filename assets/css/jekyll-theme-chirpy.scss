@@ -1,0 +1,89 @@
+---
+---
+
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* append your custom style below */
+// https://singurilla.pages.dev/posts/what-font-should-i-specificate/ から
+body {
+    font-family: "BIZ UDPゴシック", "Source Sans Pro", sans-serif;
+}@import 'main';
+
+/* append your custom style below */
+
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Noto+Sans+Mono:wght@600&display=swap');
+
+:root {
+  --bs-body-font-family:  sans-serif, "Noto Sans Mono", "BIZ UDPゴシック", "Source Sans Pro";
+  --bs-font-monospace: monospace, "Noto Sans Mono";
+}
+
+body {
+  font-family: var(--bs-body-font-family);
+}
+
+time {
+  font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
+}
+
+.site-subtitle.fst-italic {
+  font-style: normal !important;
+}
+
+#archives .date.day {
+  font-family: sans-serif;
+}
+
+header .post-desc, .site-title, #search-results a, h5, h4, h3, h2, h1 {
+  font-family: monospace, "Noto Sans Mono", "Source Sans Pro";
+  font-weight: bold;
+}
+
+button, input, optgroup, select, textarea,
+#panel-wrapper .panel-heading {
+  font-family: monospace;
+}
+
+.tag, .post-tag {
+  font-family: monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+    /* cssではidだった */
+    html:not([data-mode]) .highlight .nf, html[data-mode=dark] .highlight .nf {
+        color: #e9b2e3;
+    }
+}
+
+
+#topbar-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+
+#topbar #breadcrumb span:not(:last-child)::after {
+    font-family: "FontAwesome";
+    content: "\f105";
+    padding: 0 .3rem;
+}
+
+code.highlighter-rouge {
+  font-size: 1em;
+}
+
+b, strong {
+  color: var(--heading-color);
+}
+
+.my-md-toc {
+  h4 {
+    color: var(--text-color);
+  }
+}
+
+
