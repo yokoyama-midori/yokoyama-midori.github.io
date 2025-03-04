@@ -338,7 +338,7 @@ int main() {
 
 ## 他の問題
 <iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px" src="https://hatenablog-parts.com/embed?url=https://oj.uz/problem/view/IOI18_werewolf" width="300" height="150" frameborder="0" scrolling="no"></iframe>
-[ここ]("https://scrapbox.io/Kodaman/IOI_2018_day1_-_Werewolf")に解説とコードのリンクがある
+[ここ](https://scrapbox.io/Kodaman/IOI_2018_day1_-_Werewolf)に解説とコードのリンクがある
 <iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px" src="https://hatenablog-parts.com/embed?url=https://atcoder.jp/contests/cf17-tournament-round3-open/tasks/asaporo2_e" width="300" height="150" frameborder="0" scrolling="no"></iframe>
 トップダウンに和を取る
 <iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px" src="https://hatenablog-parts.com/embed?url=https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_h" width="300" height="150" frameborder="0" scrolling="no"></iframe>
