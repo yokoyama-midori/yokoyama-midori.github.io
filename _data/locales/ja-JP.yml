@@ -1,0 +1,10 @@
+copyright:  
+  # Shown at the bottom of the post  
+  license:  
+    template: ""  # 空文字列に変更  
+    # name: CC BY 4.0  
+    # link: https://creativecommons.org/licenses/by/4.0/  
+  
+  # Displayed in the footer  
+  brief: ""  # 空文字列に変更  
+  verbose: ""  # 空文字列に変更
