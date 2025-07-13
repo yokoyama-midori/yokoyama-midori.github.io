@@ -1,6 +1,7 @@
 ---
 title: マージ過程を表す木
 date: 2025-3-4 11:36:00 0900
+last_modified_at: 2025-7-13 16:10:00 0900
 categories: [競技プログラミング]
 tags: [木,グラフ,AtCoder,yukicoder,Codeforces]
 math : true
@@ -343,6 +344,9 @@ int main() {
 トップダウンに和を取る
 <iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px" src="https://hatenablog-parts.com/embed?url=https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_h" width="300" height="150" frameborder="0" scrolling="no"></iframe>
 LCAを使う
+<iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px" src="https://hatenablog-parts.com/embed?url=https://atcoder.jp/contests/abc372/tasks/abc372_e" width="300" height="150" frameborder="0" scrolling="no"></iframe>
+$K$についての制約を除いた問題が、マージ過程を表す木を考えることにより部分木についてのクエリに帰着できる。[解説](https://atcoder.jp/contests/abc372/editorial/10968)を参照せよ。
+
 ## 参考
 
 <iframe 
