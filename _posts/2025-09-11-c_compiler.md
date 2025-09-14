@@ -22,3 +22,21 @@ Rui Ueyamaさんの[『低レイヤを知りたい人のためのCコンパイ�
 
 6個までの引数を持つ関数の宣言に対応  
 入出力があれば簡単な競プロの問題が解けそうなコンパイラになってきた。ところでC言語って殆ど書いたことなかったけどC++に比べて全然機能がなくて驚かされる。
+
+### 9/12,13
+関数・仮引数・ローカル変数の宣言にintをつけるようにした  
+`int`や`int*,int**`,...が扱える型を導入する。
+`Type*` は各Nodeに持たせるがVarには持たせていない。  
+`int main(){ int **a; *a; }`   
+のような場合に`int **a`の型は`*`の個数ですぐに分かるが'*a'の型をどう決めるのかに悩む
+`Var`に紐づけるべきな気がするな...
+
+### 9/14
+リファレンス実装を見ながらなんとか型の実装までやった。
+`ND_EXPR_STMT`をリファレンス実装では随分前に導入していたがこのことに今日気づいた。
+`ND_EXPR_STMT`のノードをコードにする際にはスタックにプッシュされた分RSPを戻す。
+これにより実装がいくらか簡単になる。式の値を使わないような場合にこのノードを使う。
+例えば`for(init;cond;inc)`については`cond`は結果を用いるから`ND_EXPR_STMT`は用いず、`init,inc`は結果を用いないから`ND_EXPR_STMT`を使う。`peek`関数を(リファレンス同様)実装した。これは次のトークンが与えられた文字列と一致するかどうかを返す関数だ。9cc/chibiccの特徴としてコードを最初に全部読み込んでメモリに載せること、トークナイズ・パース・コード生成を並列せずに順に行うということを著者が挙げていたと思うが、この関数が自然に実装できるのはこの特徴のおかげだと思う。
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MicEimqeNb4?si=1NY5dkufjdqaZYsc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+などの動画を見た。
