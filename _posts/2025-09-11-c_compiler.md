@@ -40,3 +40,14 @@ Rui Ueyamaさんの[『低レイヤを知りたい人のためのCコンパイ�
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/MicEimqeNb4?si=1NY5dkufjdqaZYsc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 などの動画を見た。
+
+### 9/15
+配列を実装した。配列からポインタへの暗黙の型変換が難しい。  
+>配列に対して`sizeof`と単項`&`以外の演算子は定義されず暗黙のうちにポインタに変換される
+
+`ND_DEREF,ND_VAR`ではコード生成の際、型が配列かどうかで挙動を変えている。配列でない場合、`gen_addr`でスタックにアドレスを積み、`load`でアドレスをpopしてアドレスが指す値をpushする。配列の場合、例えば`int a[2];`について`*a=1;`のコード生成では`gen_addr`に`*a`が渡される。ノードは`ND_DEREF`だから`gen`に`a`が渡される。次に`gen_addr`に`a`が渡され、スタックに`a`のアドレスが積まれる。そして`a`のアドレスに`1`が代入される。  
+分かるような分からないような？とりあえず進めていく。
+
+`sizeof`を実装した。chibiccに沿って実装している。compilerbookとは違ってまず`ND_SIZEOF`を設定しておき、`add_type`の際に`ND_NUM`の定数に置き換えを行っている。また`int`は8byteとしている。
+
+グローバル変数に対応した。
