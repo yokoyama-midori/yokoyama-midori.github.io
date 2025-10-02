@@ -8,10 +8,10 @@ math : true
 
 Rui Ueyamaさんの[『低レイヤを知りたい人のためのCコンパイラ作成入門』](https://www.sigbus.info/compilerbook)と[『chibicc』のリファレンス実装](https://github.com/rui314/chibicc/tree/reference)を読みながらCコンパイラをCで作っていきます。セルフホストできるところまで進めるのが当面の目標です。日記形式で書いていきます。
 
-### 9/2 ～ 9/10
+## 9/2 ～ 9/10
 「ステップ14: 関数の呼び出しに対応する」まで進めた。
 
-### 9/11
+## 9/11
 [Commit aedbf56
 ](https://github.com/rui314/chibicc/commit/aedbf56c3af4914e3f183223ff879734683bec73#diff-629fe11334ae1d560032cdb6cc6f9a4fbb0f5b1365894b6b648d6ee4d5a654beR105-R106) では関数呼び出しの際RSPが16の倍数になるように条件分岐させている。僕の実装だと、mainのプロローグの際にRSPをローカル変数の分だけ引くことになるがそこを16の倍数になるようにしており、コード生成の際にはpushした分だけpopしてるはず。従ってこういうチェックをしなくても16の倍数に最初からなっている...はず。ここに関わらず僕の実装とchibiccの実装が異なっている箇所が色々ある。後々沼にハマることを考えるとなるべく同じロジックにしておきたい気もするがどうしようか？とりあえずこのコミットは無視して進めることにする。
 
@@ -23,7 +23,7 @@ Rui Ueyamaさんの[『低レイヤを知りたい人のためのCコンパイ�
 6個までの引数を持つ関数の宣言に対応  
 入出力があれば簡単な競プロの問題が解けそうなコンパイラになってきた。ところでC言語って殆ど書いたことなかったけどC++に比べて全然機能がなくて驚かされる。
 
-### 9/12,13
+## 9/12,13
 関数・仮引数・ローカル変数の宣言にintをつけるようにした  
 `int`や`int*,int**`,...が扱える型を導入する。
 `Type*` は各Nodeに持たせるがVarには持たせていない。  
@@ -31,7 +31,7 @@ Rui Ueyamaさんの[『低レイヤを知りたい人のためのCコンパイ�
 のような場合に`int **a`の型は`*`の個数ですぐに分かるが'*a'の型をどう決めるのかに悩む
 `Var`に紐づけるべきな気がするな...
 
-### 9/14
+## 9/14
 リファレンス実装を見ながらなんとか型の実装までやった。
 `ND_EXPR_STMT`をリファレンス実装では随分前に導入していたがこのことに今日気づいた。
 `ND_EXPR_STMT`のノードをコードにする際にはスタックにプッシュされた分RSPを戻す。
@@ -41,7 +41,7 @@ Rui Ueyamaさんの[『低レイヤを知りたい人のためのCコンパイ�
 <iframe width="560" height="315" src="https://www.youtube.com/embed/MicEimqeNb4?si=1NY5dkufjdqaZYsc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 などの動画を見た。
 
-### 9/15
+## 9/15
 配列を実装した。配列からポインタへの暗黙の型変換が難しい。  
 >配列に対して`sizeof`と単項`&`以外の演算子は定義されず暗黙のうちにポインタに変換される
 
@@ -53,7 +53,7 @@ Rui Ueyamaさんの[『低レイヤを知りたい人のためのCコンパイ�
 グローバル変数に対応した。
 よく言われることだけど、ローカル変数とグローバル変数が内部的にはかなり違う実装になっていて驚く。
 
-### 9/16
+## 9/16
 `char`型を実装した。8byte以外のデータの最初の導入。  
 
 文字列リテラルを実装した。`#include <stdio.h>`をコンパイルしたオブジェクトファイルとリンクすることで`printf`が使えるようになった。Cの文字列リテラルが変更できなくて、静的領域に置かれるというのを知ってびっくりした。
@@ -71,3 +71,50 @@ GNU拡張の式文を追加。エスケープ文字に対応。
 
 TCFMを聞いていたがイランの核施設の遠心分離機をアメリカ側がUSB経由のマルウェアを使って物理的に破壊したという話が面白かった
 <iframe class="hatenablogcard" style="width:100%;height:155px;max-width:680px" src="https://hatenablog-parts.com/embed?url=https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%82%B9%E3%83%8D%E3%83%83%E3%83%88" width="300" height="150" frameborder="0" scrolling="no"></iframe>
+
+## 9/20
+`struct`に対応した。C++では
+```cpp 
+struct Name {
+    /* ... */
+}; 
+```
+という形でグローバルにしかほとんど使ったことがなかったので、ローカルにも定義できることや無名の`struct`が作れることを知らなかった。入れ子に定義するのはSplay木を書いたときに使ったことがあったな。ここでは
+```c
+struct {
+    /* ... */
+} x; 
+```
+という形の無名の`struct`にしか対応していない。
+
+## 9/21
+アラインメントを調整した。リファレンス実装だと2つのcommitで1つの意味のある修正になっていると思う。  
+struct tagの追加
+
+## 9/24
+`->`opを追加した。構造体のタグを追加した。
+
+## 9/28
+コンパイラーブックの『Cの型の構文』の章を読んだ。signal関数の宣言なかなかやばい。
+```c
+void (*signal(int, void (*)(int)))(int);
+```
+
+## 10/1
+`typedef`を実装した
+テストには
+```cpp
+typedef int t;
+t t = 1;
+```
+というコードがある。このままだとgccやclangでコンパイルは通らないが
+```cpp
+typedef int t;
+{ t t = 1; }
+```
+のようにするとコンパイル出来てしまうらしい。
+
+## 10/2
+`sizeof(int)`を8から4にした。
+`short`,`long`を追加した。
+
