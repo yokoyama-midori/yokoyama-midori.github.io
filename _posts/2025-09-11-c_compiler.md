@@ -120,7 +120,7 @@ typedef int t;
 
 ## 10/5
 ネストされた型宣言に対応。　
-[演算子の優先順位]("https://learn.microsoft.com/ja-jp/cpp/c-language/precedence-and-order-of-evaluation?view=msvc-170")を確認した。
+[演算子の優先順位](https://learn.microsoft.com/ja-jp/cpp/c-language/precedence-and-order-of-evaluation?view=msvc-170)を確認した。
 大まかに言って型の読み方としては `pre (mid) suf`という型宣言があった場合、Goの(理解しやすい)記法では`mid suf pre`の順となる。例えば`int (*x)[3]`の場合`var x *[3]int`となる。すなわち`x`はポインタであり、そのベースは長さ3の配列であり、そのベースは`int`である。コードの並びとデータの並びが一致していないのでややこしい。chibiccでの実装の一部
 
 ```c
